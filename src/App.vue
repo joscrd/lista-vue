@@ -3,7 +3,7 @@
 
   <div id="main-container">
     <h2>Tareas</h2>
-    <Tareas v-bind:tareasList="copyTareas" />
+    <Tareas v-bind:tareasList="copyTareas" v-on:delete-tarea="deleteTarea"/>
   </div>
 </template>
 
@@ -16,6 +16,13 @@ export default {
   name: 'App',
   components: {
     Tareas
+  },
+
+  methods:{
+    deleteTarea(id){
+      this.tareas = this.tareas.filter(tarea => tarea.id != id);
+      this.copyTareas = [...this.tareas];
+    }
   },
 
   data() {
@@ -34,7 +41,7 @@ export default {
         {
           id: 2,
           title: 'fumar mota',
-          completed: false
+          completed: true
         }
       ],
       copyTareas: []
