@@ -3,7 +3,7 @@
         <div class="tarea-body" >
             <input type="checkbox" 
             v-bind:checked="tarea.completed ? 'checked': ''"
-            v-on:change="tareaCheck">
+            v-on:change="tareaCheck" >
             {{tarea.title}}
         </div>
 

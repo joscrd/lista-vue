@@ -1,26 +1,33 @@
+//Estructura HTML del componente principal
 <template>
   <div id="header"></div>
 
   <div id="main-container">
     <h2>Tareas</h2>
+    <TareaAdd v-on:add-tarea="addTarea"/>
     <Tareas v-bind:tareasList="copyTareas" v-on:delete-tarea="deleteTarea"/>
   </div>
 </template>
 
+//Funcionalidad del componente principal, codigo JS
 <script>
 //import Search from './components/Search';
 import Tareas from './components/Tareas';
-//import TareaAdd from './components/TareaAdd'
+import TareaAdd from './components/TareaAdd'
 
 export default {
   name: 'App',
   components: {
-    Tareas
+    Tareas, TareaAdd
   },
 
   methods:{
     deleteTarea(id){
       this.tareas = this.tareas.filter(tarea => tarea.id != id);
+      this.copyTareas = [...this.tareas];
+    },
+    addTarea(tarea){
+      this.tareas.push(tarea);
       this.copyTareas = [...this.tareas];
     }
   },
@@ -54,6 +61,7 @@ export default {
 }
 </script>
 
+//Estilos CSS del componente principal
 <style>
   *{
     box-sizing: border-box;
