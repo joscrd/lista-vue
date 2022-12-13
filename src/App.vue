@@ -1,7 +1,9 @@
 //Estructura HTML del componente principal
 <template>
-  <div id="header"></div>
-
+  <div id="header">
+    <Search v-on:query-change="querySearch"/>
+  </div>
+    
   <div id="main-container">
     <h2>Tareas</h2>
     <TareaAdd v-on:add-tarea="addTarea"/>
@@ -11,14 +13,14 @@
 
 //Funcionalidad del componente principal, codigo JS
 <script>
-//import Search from './components/Search';
+import Search from './components/Search';
 import Tareas from './components/Tareas';
 import TareaAdd from './components/TareaAdd'
 
 export default {
   name: 'App',
   components: {
-    Tareas, TareaAdd
+    Tareas, TareaAdd, Search
   },
 
   methods:{
@@ -29,6 +31,17 @@ export default {
     addTarea(tarea){
       this.tareas.push(tarea);
       this.copyTareas = [...this.tareas];
+    },
+    querySearch(query){
+      if(query.trim() === ''){
+        this.copyTareas = [...this.tareas];
+      }else{
+        const temp = this.tareas.filter(tarea => {
+          return tarea.title.includes(query)
+        });
+
+        this.copyTareas = [...temp];
+      }
     }
   },
 
@@ -47,7 +60,7 @@ export default {
         },
         {
           id: 2,
-          title: 'fumar mota',
+          title: 'pasear al perro',
           completed: true
         }
       ],
