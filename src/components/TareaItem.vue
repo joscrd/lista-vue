@@ -2,8 +2,8 @@
     <div class="tarea" v-bind:class="{completed: tarea.completed}">
         <div class="tarea-body" >
             <input type="checkbox" 
-            v-bind:checked="tarea.completed ? 'checked': ''"
-            v-on:change="tareaCheck" >
+                v-bind:checked="tarea.completed ? 'checked': ''"
+                v-on:change="checkTarea">
             {{tarea.title}}
         </div>
 
@@ -18,15 +18,15 @@
         name: 'TareaItem',
         props: ['tarea'],
         methods: {
-            tareaCheck(){
+            checkTarea(){
                 this.tarea.completed = !this.tarea.completed;
             }
         }
     }
 </script>
 
-<style>
-     .tarea{
+<style scoped>
+    .tarea{
         border-bottom: solid 1px #ccc;
         padding: 10px;
     }
